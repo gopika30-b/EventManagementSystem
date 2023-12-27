@@ -1,0 +1,23 @@
+<%- include('participantHead.ejs') %>
+<div class="event-details-container">
+    <h2><%= event.title %></h2>
+    <div class="event-info">
+        <p><strong>Category:</strong> <%= event.category %></p>
+        <p><strong>Event Mode:</strong> <%= event.eventMode %></p>
+        <p><strong>Event Venue:</strong> <%= event.eventVenue %></p>
+        <p><strong>Event Date:</strong> <%= event.eventDate %></p>
+        <p><strong>Event Time:</strong> <%= event.eventTime %></p>
+    </div>
+    <p class="event-description"><strong>Event Description:</strong> <%= event.eventDescription %></p>
+    <p class="event-coordinator"><strong>Event Coordinator:</strong> <%= event.eventCoordinatorName %></p>
+    <p><strong>Contact Number:</strong> <%= event.eventCoordinatorNumber %></p>
+    <p><strong>Email:</strong> <%= event.eventCoordinatorMailID %></p>
+    <p><strong>Event Rules:</strong></p>
+    <ul class="event-rules">
+        <% event.eventRules.forEach(rule => { %>
+            <li><%= rule %></li>
+        <% }); %>
+    </ul>
+    <a class="button" href="<%= event.eventRegisterationLink %>" target="_blank">Register Now</a>
+</div>
+<%- include('participantFoot.ejs') %>

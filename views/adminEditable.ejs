@@ -1,0 +1,10 @@
+<%- include('adminHead.ejs') %>
+<div style="padding: 20px; border: 3px solid black;margin: 70px">
+    <section class="hero">
+        <div class="container">
+            <h1 id="editableContent1" ondblclick="editContent(this,  '<%= content._id %>', 'mainHead', 'content')" data-id="<%= content._id %>"><%= content.mainHead %></h1>
+            <p id="editableContent2" ondblclick="editContent(this, '<%= content._id %>', 'subHead1', 'content')" data-id="<%= content._id %>"><%= content.subHead1 %></p>            
+        </div>
+    </section>
+</div>
+<%- include('adminFoot.ejs') %>

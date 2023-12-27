@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Login</title>
+</head>
+<body>
+    <section class="login-form">
+        <div class="container">
+            <h1>Login</h1>
+            <form id="loginForm">
+                <label for="userID">User ID:</label>
+                <input type="text" id="userID" name="userID" required>
+                
+                <label for="psw">Password:</label>
+                <input type="password" id="psw" name="psw" required>
+                
+                <label>User Type:</label>
+                <input type="radio" id="admin" name="userType" value="admin" required>
+                <label for="admin">Admin</label>
+                
+                <input type="radio" id="eventCoordinator" name="userType" value="eventCoordinator" required>
+                <label for="eventCoordinator">Event Coordinator</label>
+                
+                <input type="radio" id="participant" name="userType" value="participant" required>
+                <label for="participant">Participant</label>
+                
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="../html/signup.html">Sign up</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 EventHub. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/login.js"></script>
+</body>
+</html>

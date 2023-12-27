@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/styleParticipant.css">
+</head>
+<body>
+    <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: xx-large;font-family: 'Times New Roman', Times, serif;font-weight: bolder;"><br><%= content1 %></div>
+    <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: large;font-family: 'Times New Roman', Times, serif;font-weight: bold;"><br><%= content2 %><br><br></div>
+    <br><br>
+     <nav class="navbar">
+        <ul class="nav-list">
+            <li><a onclick="redirectTo('/participant', '<%= userID %>')">Home</a></li>
+            <li><a onclick="prompt('Enter your Feedback')">Feedback</a></li>
+            <li><a href="/">Log Out</a></li>
+            <li><a id="accountBtn">Account</a></li>
+        </ul>
+    </nav>
+
+    <div class="account-modal" id="accountModal">
+        <h2>Account Information</h2>
+        <p><strong>Username:</strong><%= user.userID %></p>
+        <p><strong>Full Name:</strong><%= user.fullName %></p>
+        <p><strong>Phone Number:</strong><%= user.number %></p>
+        <p><strong>Email:</strong><%= user.email %></p>
+        <button id="closeModalBtn">Close</button>
+    </div>

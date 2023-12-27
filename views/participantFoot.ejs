@@ -1,0 +1,22 @@
+<footer>
+    <p>&copy; 2023 EventHub. All rights reserved.</p>
+</footer>
+<script>
+    function redirectTo(url, userID) {
+    window.location.href = `${url}?userID=${userID}`;
+  }
+    const accountBtn = document.getElementById('accountBtn');
+const accountModal = document.getElementById('accountModal');
+const editBtn = document.getElementById('editBtn');
+
+accountBtn.addEventListener('click', () => {
+    accountModal.style.display = 'block';
+});
+closeModalBtn.addEventListener('click', () => {
+        accountModal.style.display = 'none';
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/styleAdmin.css">
+</head>
+<body>
+    <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: xx-large;font-family: 'Times New Roman', Times, serif;font-weight: bolder;"><br><%= content1 %></div>
+    <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: large;font-family: 'Times New Roman', Times, serif;font-weight: bold;"><br><%= content2 %><br><br></div>
+    <br><br>
+<div class="topnav" id="myTopnav">
+  <a onclick="redirectTo('/coordinator/events', '<%= userID %>')" class="active">My Events</a>
+  <a onclick="redirectTo('/coordinator', '<%= userID %>')">All Events</a>
+  <!-- <div class="dropdown">
+    <button class="dropbtn">Event
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </div>  -->
+  <a onclick="window.location.href='/'" >Log Out</a>
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>

@@ -1,0 +1,154 @@
+<%- include('adminHead.ejs') %>
+<div style="padding: 20px; border: 3px solid black;margin: 70px">
+<% const categories =[]; %>
+<% events.forEach(event => { %>
+<%   if(!categories.includes(event.category)){ %>
+<%     categories.push(event.category); %>
+<%   } %>
+<% }); %>
+<% const len = categories.length %>
+<% for (let i=0; i<len; i++ ){ %>
+  <div class="g0" style="padding: 20px; border: 3px solid black;">
+    <h3><%= categories[i] %></h3>
+    <div class="row">
+      <% events.forEach(event => { %>
+        <% if (event.category== categories[i]) { %> 
+          <div class="column">
+            <div class="card">
+              <div class="container">
+                <h4 id="editableContent1" ondblclick="editContent(this, '<%= event._id %>', 'title', 'event')" data-id="<%= event._id %>"><%= event.title %></h4>
+                <p class="title" id="editableContent2" ondblclick="editContent(this, '<%= event._id %>', 'catchy', 'event')" data-id="<%= event._id %>"><%= event.catchy %></p>
+                        <p><button class="button1" onclick="openModalid06('<%= event._id %>')">View</button></p>
+                        <p><button class="button1" onclick="openEditModal('<%= event._id %>')">Edit</button></p>
+                        </div>
+            </div>
+          </div>
+          <% } %>
+        <% }) %>
+    </div>
+  </div>
+<% } %> 
+
+<div id="id00" class="modal">  </div>
+
+<div id="id01" class="modal">
+  <form class="modal-content animate" id="adminForm" action="/addUser" method="POST">
+    <div class="container"><br><br>
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" name="fullName" required><br><br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br><br>
+      <label for="number">Phone Number:</label>
+      <input type="text" id="number" name="number" required><br><br>
+      <label>User Type:</label><br>
+      <input type="radio" id="admin" name="type" value="admin" required>
+      <label for="admin">Admin</label><br>
+      <input type="radio" id="eventCoordinator" name="type" value="eventCoordinator" required>
+      <label for="eventCoordinator">Event Coordinator</label><br><br>
+      <label for="userID">User ID:</label>
+      <input type="text" id="userID" name="userID" required><br><br>
+      <label for="psw">Password:</label>
+      <input type="password" id="psw" name="psw" required><br><br>
+      <button type="submit" >Submit</button>
+    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn" style="float: right;">Cancel</button></div>
+  </form>    
+</div>
+
+<div id="id02" class="modal">
+  <form class="modal-content animate" id="deleteEvent" action="/deleteEvent" method="POST">
+    <div class="container"><br><br>
+      <h2>Select Events to Delete</h2>
+      <ul id="eventList">
+      </ul>
+      <button type="submit">Delete Selected Events</button>
+    <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn" style="float: right;">Cancel</button>
+  </div>
+  </form>    
+</div>
+
+<div id="id03" class="modal">
+  <form class="modal-content animate" id="deleteAdminUser" action="/deleteAdminUser" method="POST">
+    <div class="container"><br><br>
+      <h2>Select Admin Users to Delete</h2>
+      <ul id="adminUsersList">
+      </ul>
+      <button type="submit">Delete Selected Users</button>
+    <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn" style="float: right;">Cancel</button>
+  </div>
+  </form>    
+</div>
+
+<div id="id04" class="modal">
+  <form class="modal-content animate" id="deleteCoordinatorUser" action="/deleteCoordinatorUser" method="POST">
+    <div class="container"><br><br>
+      <h2>Select Co-ordinator Users to Delete</h2>
+      <ul id="coordinatorUsersList">
+      </ul>
+      <button type="submit">Delete Selected Users</button>
+    <button type="button" onclick="document.getElementById('id04').style.display='none'" class="cancelbtn" style="float: right;">Cancel</button>
+  </div>
+  </form>    
+</div>
+
+<div id="id05" class="modal">
+  <form class="modal-content animate">
+    <div class="container"><br><br>
+      <input type="hidden" id="eventID" name="eventID" required>
+      <label for="category">Category:</label><br>
+      <% categories.forEach(category => { %>
+        <input type="radio" id="category_<%= category %>" name="category" value="<%= category %>" required>
+        <label for="category_<%= category %>"><%= category %></label><br>
+      <% }); %><br>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required><br><br>
+      <label for="catchy">Catchy:</label>
+      <input type="text" id="catchy" name="catchy" required><br><br>
+      <label for="eventDescription">Event Description:</label><br>
+      <textarea id="eventDescription" name="eventDescription" rows="4" cols="50" required></textarea><br><br>
+      <label for="eventMode">Event Mode:</label>
+      <input type="text" id="eventMode" name="eventMode" required><br><br>
+      <label for="eventRules">Event Rules:</label>
+      <div id="eventRulesContainer">
+      </div>
+      <button type="button" onclick="addNewRule()">Add Rule</button><br>
+      <label for="eventVenue">Event Venue:</label>
+      <input type="text" id="eventVenue" name="eventVenue" required><br><br>
+      <label for="eventDate">Event Date:</label>
+      <input type="text" id="eventDate" name="eventDate" required><br><br>
+      <label for="eventCoordinatorName">Event Coordinator Name:</label><br>
+      <% eventCoordinators.forEach(coordinator => { %>
+        <input type="radio" id="coordinator_<%= coordinator.fullName %>" name="eventCoordinatorName" value="<%= coordinator.fullName %>" required>
+        <label for=""><%= coordinator.fullName %></label><br>
+      <% }); %><br>
+      <label for="eventTime">Event Time:</label>
+      <input type="text" id="eventTime" name="eventTime" required><br><br>
+      <label for="eventRegisterationLink">Event Registration Link:</label>
+      <input type="url" id="eventRegisterationLink" name="eventRegisterationLink" required><br><br>
+  
+      <button class="b1" onclick=" updateEvent()">Update Event</button>
+      <button type="button" onclick="document.getElementById('id05').style.display='none'" class="cancelbtn" style="float: right;">Cancel</button></div>
+  </form>     
+</div>
+
+<div id="eventModal" class="modal">
+  <form class="modal-content animate">
+    <div class="container"><br><br>
+      <p>Category: <span id="categoryValue"></span></p>
+      <p>Title: <span id="titleValue"></span></p>
+      <p>Catchy: <span id="catchyValue"></span></p>
+      <p>Event Description: <span id="descriptionValue"></span></p>
+      <p>Event Mode: <span id="modeValue"></span></p>
+      <p>Rules:</p>
+      <ul id="rulesList"></ul>
+      <p>Event Venue: <span id="venueValue"></span></p>
+      <p>Event Date: <span id="dateValue"></span></p>
+      <p>Event Coordinator Name: <span id="coordinatorNameValue"></span></p>
+      <p>Event Time: <span id="timeValue"></span></p>
+      <p>Click to <a id="registrationLink" target="_blank">Register</a></p>
+      <button type="button" onclick="document.getElementById('eventModal').style.display='none'" class="cancelbtn" style="float: right;">Cancel</button>
+    </div>
+  </form>
+</div>
+
+
+<%- include('adminFoot.ejs') %>

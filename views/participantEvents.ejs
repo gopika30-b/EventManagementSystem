@@ -1,0 +1,29 @@
+<%- include('participantHead.ejs') %>
+<% const categories =[]; %>
+<% events.forEach(event => { %>
+<%   if(!categories.includes(event.category)){ %>
+<%     categories.push(event.category); %>
+<%   } %>
+<% }); %>
+<% const len = categories.length %>
+<% for (let i=0; i<len; i++ ){ %>
+  <div class="g0" style="padding: 20px; border: 3px solid black;">
+    <h3><%= categories[i] %></h3>
+    <div class="row">
+      <% events.forEach(event => { %>
+        <% if (event.category== categories[i]) { %>
+          <div class="column">
+            <div class="card">
+              <div class="container">
+                <h4 id="editableContent1" data-id="<%= event._id %>"><%= event.title %></h4>
+                <p class="title" id="editableContent2" data-id="<%= event._id %>"><%= event.catchy %></p>
+                        <p><button class="button1" onclick="redirectTo('/participant/<%= event.rootURL %>', '<%= userID %>')" >View</button></p>
+                    </div>
+            </div>
+          </div>
+          <% } %>
+        <% }) %>
+    </div>
+  </div>
+<% } %> 
+<%- include('participantFoot.ejs') %>

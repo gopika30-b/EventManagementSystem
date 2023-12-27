@@ -1,0 +1,185 @@
+/* Nav */
+.navbar {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 10px;
+}
+
+.nav-list li {
+    margin-right: 15px;
+}
+
+.nav-list li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.account-modal {
+    position: absolute;
+    top: 205px;
+    right: 2px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+#editBtn {
+    margin-top: 10px;
+}
+
+
+/* Footer */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+  }
+  
+  /* Events Page */
+  .g0{
+    display: block;
+    font-size: larger;
+    text-align: center;
+    padding: 40px;
+    color:black;
+    margin: 80px ;
+    align-items: center;  
+  }
+  h3 {
+    text-align: center;
+  }
+  .g1 {
+    display: grid;
+    grid-template-columns:auto auto auto auto auto auto auto auto;
+    gap: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+    overflow-x: scroll;
+  }
+  .row {
+    display: flex;
+    overflow: auto;
+    padding: 19px 0px;
+  }
+  .column {
+    float: left;
+    padding: 0 10px;
+    transition: 0.5s;
+  }
+  .column:hover {
+    transform:scale(1.1);
+    z-index: 2;
+  }
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, .6);
+    border-radius: 10px;
+    
+  }
+  
+  .container {
+    padding: 0 16px;
+  }
+  h4 {
+    margin: 10px;
+  }
+  
+  .container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .title {
+    color: grey;
+    margin: 0px;
+    font-size: 11pt;
+  }
+  
+  .button1 {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: rgba(0,0,0);
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+  }
+  @media screen and (max-width:660px) {
+    .g0 {
+      margin: 40px;
+    } 
+  }
+  .event-details-container {
+    max-width: 800px;
+    margin: 0 auto; 
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: left;
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin: 0 0 10px;
+}
+
+.event-info p {
+    margin: 5px 0;
+}
+
+.event-description {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.event-coordinator {
+    font-weight: bold;
+}
+
+.event-coordinator p {
+    margin: 5px 0;
+}
+
+ul.event-rules {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,48 @@
+<%- include('coordinatorHead.ejs') %>
+<% const categories =[]; %>
+<% events.forEach(event => { %>
+<%   if(!categories.includes(event.category)){ %>
+<%     categories.push(event.category); %>
+<%   } %>
+<% }); %>
+<% const len = categories.length %>
+<% for (let i=0; i<len; i++ ){ %>
+  <div class="g0" style="padding: 20px; border: 3px solid black;">
+    <h3><%= categories[i] %></h3>
+    <div class="row">
+      <% events.forEach(event => { %>
+        <% if (event.category== categories[i]) { %>
+          <div class="column">
+            <div class="card">
+              <div class="container">
+                <h4 id="editableContent1" data-id="<%= event._id %>"><%= event.title %></h4>
+                <p class="title" id="editableContent2" data-id="<%= event._id %>"><%= event.catchy %></p>
+                <p><button class="button1" onclick="openModalid06('<%= event._id %>')">View</button></p>
+                    </div>
+            </div>
+          </div>
+          <% } %>
+        <% }) %>
+    </div>
+  </div>
+  <div id="eventModal" class="modal">
+    <form class="modal-content animate">
+      <div class="container"><br><br>
+        <p>Category: <span id="categoryValue"></span></p>
+        <p>Title: <span id="titleValue"></span></p>
+        <p>Catchy: <span id="catchyValue"></span></p>
+        <p>Event Description: <span id="descriptionValue"></span></p>
+        <p>Event Mode: <span id="modeValue"></span></p>
+        <p>Rules:</p>
+        <ul id="rulesList"></ul>
+        <p>Event Venue: <span id="venueValue"></span></p>
+        <p>Event Date: <span id="dateValue"></span></p>
+        <p>Event Coordinator Name: <span id="coordinatorNameValue"></span></p>
+        <p>Event Time: <span id="timeValue"></span></p>
+        <p>Click to <a id="registrationLink" href="#" target="_blank">Register</a></p>
+        <button type="button" onclick="document.getElementById('eventModal').style.display='none'" class="cancelbtn" style="float: right;">Cancel</button>
+      </div>
+    </form>
+  </div>
+<% } %> 
+<%- include('coordinatorFoot.ejs') %>

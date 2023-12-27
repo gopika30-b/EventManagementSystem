@@ -1,0 +1,145 @@
+<footer>
+    <p>&copy; 2023 EventHub. All rights reserved.</p>
+</footer>
+<script>
+    function redirectTo(url, userID) {
+    window.location.href = `${url}?userID=${userID}`;
+  }
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+
+    function openEditModal(eventId) {
+    fetch(`/getEventDetails/${eventId}`)
+      .then(response => response.json())
+      .then(eventData => {
+        document.getElementById('eventID').value = eventData._id;
+        document.getElementById('category_' + eventData.category).checked = true; 
+        document.getElementById('title').value = eventData.title;
+        document.getElementById('catchy').value = eventData.catchy;
+        document.getElementById('eventDescription').value = eventData.eventDescription;
+        document.getElementById('eventMode').value = eventData.eventMode;
+        const eventRulesContainer = document.getElementById('eventRulesContainer');
+        eventRulesContainer.innerHTML = '';
+        eventData.eventRules.forEach(rule => {
+          const ruleInput = createRuleInput(rule);
+          eventRulesContainer.appendChild(ruleInput);
+        });
+        document.getElementById('eventVenue').value = eventData.eventVenue;
+        document.getElementById('eventDate').value = eventData.eventDate;
+        document.getElementById('eventCoordinatorName').innerText = eventData.eventCoordinatorName;
+        document.getElementById('eventTime').value = eventData.eventTime;
+        document.getElementById('eventRegisterationLink').value = eventData.eventRegisterationLink;
+        document.getElementById('id05').style.display = 'block';
+      })
+      .catch(error => console.error(error));
+  }
+  function createRuleInput(ruleText) {
+  const ruleInput = document.createElement('div');
+  ruleInput.innerHTML = `
+    <input type="text" class="rule-input" value="${ruleText}" required>
+    <button type="button" onclick="removeRule(this)">Remove</button>
+  `;
+  return ruleInput;
+}
+
+function openModalid06(eventId) {
+  fetch(`/getEventDetails/${eventId}`)
+    .then(response => response.json())
+    .then(eventData => {
+      console.log(eventData);
+      document.getElementById('categoryValue').innerText = eventData.category;
+      document.getElementById('titleValue').innerText = eventData.title;
+      document.getElementById('catchyValue').innerText = eventData.catchy;
+      document.getElementById('descriptionValue').innerText = eventData.eventDescription;
+      document.getElementById('modeValue').innerText = eventData.eventMode;
+      const rulesList = document.getElementById('rulesList');
+      rulesList.innerHTML = '';
+      eventData.eventRules.forEach(rule => {
+        const listItem = document.createElement('li');
+        listItem.innerText = rule;
+        rulesList.appendChild(listItem);
+      });
+
+      document.getElementById('venueValue').innerText = eventData.eventVenue;
+      document.getElementById('dateValue').innerText = eventData.eventDate;
+      document.getElementById('coordinatorNameValue').innerText = eventData.eventCoordinatorName;
+      document.getElementById('timeValue').innerText = eventData.eventTime;
+      const registrationLink = document.getElementById('registrationLink');
+      registrationLink.href = eventData.eventRegisterationLink;
+      registrationLink.innerText = 'Register';
+      document.getElementById('eventModal').style.display = 'block';
+    })
+    .catch(error => console.error(error));
+}
+
+
+
+function addNewRule() {
+  const eventRulesContainer = document.getElementById('eventRulesContainer');
+  const ruleInput = createRuleInput('');
+  eventRulesContainer.appendChild(ruleInput);
+}
+
+function removeRule(button) {
+  const eventRulesContainer = document.getElementById('eventRulesContainer');
+  eventRulesContainer.removeChild(button.parentElement);
+}
+function updateEvent() {
+  const eventID = document.getElementById('eventID').value;
+  const category = document.querySelector('input[name="category"]:checked').value;
+  const title = document.getElementById('title').value;
+  const catchy = document.getElementById('catchy').value;
+  const eventDescription = document.getElementById('eventDescription').value;
+  const eventMode = document.getElementById('eventMode').value;
+  const eventVenue = document.getElementById('eventVenue').value;
+  const eventDate = document.getElementById('eventDate').value;
+  const eventCoordinatorName = document.getElementById('eventCoordinatorName').innerText;
+  const eventTime = document.getElementById('eventTime').value;
+  const eventRegisterationLink = document.getElementById('eventRegisterationLink').value;
+  console.log(eventDescription);
+  console.log(eventCoordinatorName);
+  const ruleInputs = document.querySelectorAll('.rule-input');
+  const eventRules = [];
+  ruleInputs.forEach(input => {
+    const ruleText = input.value.trim();
+    if (ruleText !== '') {
+      eventRules.push(ruleText);
+    }
+  });
+  const updatedEventData = {
+    eventID,
+    category,
+    title,
+    catchy,
+    eventDescription,
+    eventMode,
+    eventVenue,
+    eventDate,
+    eventCoordinatorName,
+    eventTime,
+    eventRegisterationLink,
+    eventRules,
+  };
+  fetch(`/updateEvent/${eventID}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updatedEventData)
+  })
+  .then(response => response.json())
+  .then(response => {
+    location.reload();
+    alert("Successfully updated!!");
+  })
+  .catch(error => console.error(error));
+}   
+    </script>
+    </body>
+    </html>
